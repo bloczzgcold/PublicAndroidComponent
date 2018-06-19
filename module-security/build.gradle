@@ -1,0 +1,16 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+// 配置参数
+ext {
+    maven_artifactId = 'module-security'
+}
+apply from: rootProject.file('maven-java.gradle')
+
+dependencies {
+    implementation project(':module-logger')
+    implementation project(':module-commons')
+
+    testImplementation rootProject.ext.deps.junit
+    testImplementation rootProject.ext.deps."commons-io"
+}

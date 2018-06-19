@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':module-logger', ':module-timer', ':module-commons', ':module-security', ':module-http', ':module-http-okhttp', ':module-serialport', ':module-base', ':module-usbserial'

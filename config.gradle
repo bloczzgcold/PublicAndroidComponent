@@ -1,0 +1,50 @@
+ext {
+// 读取配置文件
+    Properties properties = new Properties()
+    properties.load(rootProject.file('maven.properties').newDataInputStream())
+    properties.load(rootProject.file('local.properties').newDataInputStream()) // 实际发布服务器信息在local中配置
+    def SDK_PATH = properties.getProperty("sdk.dir")
+    maven_version = properties.getProperty('maven.version')
+    maven_versionCode = properties.getProperty('maven.versionCode')
+    android = [
+            compileSdkVersion: 26,
+            buildToolsVersion: '26.0.2',
+            minSdkVersion    : 17,
+            targetSdkVersion : 26,
+            versionCode      : maven_versionCode,
+            versionName      : maven_version
+    ]
+
+    depsVersion = [
+            junitVersion: '4.12',
+            support     : '26.1.0',
+            finance     : '1.0.3',
+            gson        : '2.8.2',
+            guava       : '19.0',
+            greendao    : '3.2.2',
+            constraint  : '1.1.0',
+            okhttp      : '3.10.0',
+            commons_io  : "2.6"
+    ]
+
+    deps = [
+            'junit'            : "junit:junit:${depsVersion.junitVersion}",
+            'support-v7'       : "com.android.support:appcompat-v7:${depsVersion.support}",
+            'module-logger'    : "com.wizhong.finance:module-logger:${depsVersion.finance}",
+            'module-commons'   : "com.wizhong.finance:module-commons:${depsVersion.finance}",
+            'module-http'      : "com.wizhong.finance:module-http:${depsVersion.finance}",
+            'module-okhttp'    : "com.wizhong.finance:module-okhttp:${depsVersion.finance}",
+            'gson'             : "com.google.code.gson:gson:${depsVersion.gson}",
+            'guava'            : "com.google.guava:guava:${depsVersion.guava}",
+            'greendao'         : "org.greenrobot:greendao:${depsVersion.greendao}",
+            'constraint-layout': "com.android.support.constraint:constraint-layout:${depsVersion.constraint}",
+            'okhttp'           : "com.squareup.okhttp3:okhttp:${depsVersion.okhttp}",
+            "commons-io"       : "commons-io:commons-io:${depsVersion.commons_io}",
+    ]
+
+    // 文件路径
+    files = [
+            //android sdk file path
+            android: SDK_PATH + "/platforms/android-${android.compileSdkVersion}/android.jar"
+    ]
+}

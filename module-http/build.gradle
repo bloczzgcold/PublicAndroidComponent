@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+// 配置参数
+ext {
+    maven_artifactId = 'module-http'
+}
+apply from: rootProject.file('maven-java.gradle')
+
+dependencies {
+    implementation project(':module-logger')
+}

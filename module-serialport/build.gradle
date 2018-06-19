@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+// 配置参数
+ext {
+    maven_artifactId = 'module-serialport'
+    maven_description = '串口通信'
+}
+apply from: rootProject.file('maven-android.gradle')
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["verionCode"]
+        versionName rootProject.ext.android["versionName"]
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+}
+
+dependencies {
+    compileOnly files(rootProject.files.android)
+    implementation rootProject.ext.deps["support-v7"]
+    testImplementation rootProject.ext.deps["junit"]
+}
