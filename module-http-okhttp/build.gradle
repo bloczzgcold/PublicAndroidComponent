@@ -8,6 +8,7 @@ ext {
 apply from: rootProject.file('maven-java.gradle')
 
 dependencies {
+    compileOnly files(rootProject.files.android)
     implementation project(':module-logger')
     compileOnly project(':module-http')
     implementation rootProject.ext.deps.okhttp

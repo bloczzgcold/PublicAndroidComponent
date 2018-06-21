@@ -8,9 +8,7 @@ ext {
 apply from: rootProject.file('maven-java.gradle')
 
 dependencies {
+    compileOnly files(rootProject.files.android)
     implementation project(':module-logger')
     implementation project(':module-commons')
-
-    testImplementation rootProject.ext.deps.junit
-    testImplementation rootProject.ext.deps."commons-io"
 }
